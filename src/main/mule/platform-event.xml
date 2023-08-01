@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd">
+	<salesforce:sfdc-config name="Salesforce_Config" doc:name="Salesforce Config" doc:id="8f95c18c-9cb8-402a-ba8f-768bf8f72029" >
+		<salesforce:basic-connection username="teresa_atcp@bic.sfdc.crmdev1" password="@Jungkook1997" />
+	</salesforce:sfdc-config>
+	<salesforce:sfdc-config name="Salesforce_Config_OAuth" doc:name="Salesforce Config" doc:id="7d02e9de-81c4-4140-9260-f0a1b3dc3994" >
+		<salesforce:oauth-user-pass-connection consumerKey="3MVG9Se4BnchkASl9UtA1hd5OulFNdUQKnKT9ccKeWqO4Y8mP18a.o55pM7.SZmtpP.KGwbZD8pswwo8eCdV7" consumerSecret="BD0A946413027DF0B86DBA19E0B2398576E0D48C6AB350DEF19C9E4E342ED810" username="teresa_atcp@bic.sfdc.crmdev1" password="@Jungkook1997" tokenEndpoint="https://test.salesforce.com/services/oauth2/token" />
+	</salesforce:sfdc-config>
+	<flow name="platform-eventFlow" doc:id="a4417ee6-9101-4518-bf41-2a788fe34a69" >
+		<salesforce:subscribe-channel-listener streamingChannel="/event/AsyncAccount__e" doc:name="Subscribe channel listener" doc:id="fafa4845-2d57-4f31-b093-248d84c99ef0" config-ref="Salesforce_Config_OAuth"/>
+		<logger level="INFO" doc:name="Logger" doc:id="c9ec15d9-f3d2-4dd9-86a5-9b9887c7cf54" message='#[output application/json &#10;---&#10;{&#10;	"when" : now(), &#10;	"what" : payload&#10;}]'/>
+	</flow>
+</mule>
