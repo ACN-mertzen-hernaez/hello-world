@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="0674fd9b-fc04-4cf8-b473-135e101f0724" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="hellomuleFlow" doc:id="5bb4b0ba-e58e-4c2d-b15c-107f4f9c6680" >
+		<http:listener doc:name="Listener" doc:id="b0233a1d-d33d-44ec-9e2f-c8b759b09e91" config-ref="HTTP_Listener_config" path="/hellomule" />
+		<set-payload value="Hello Mule Waazzzup" doc:name="Set Payload" doc:id="76482ce1-df55-4786-a86c-97044b4532e0" />
+	</flow>
+</mule>
